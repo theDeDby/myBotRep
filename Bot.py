@@ -212,7 +212,7 @@ def schedule_send_task_reminder(user_id, subject, desc):
 #   Токен и команды
 #
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-app = ApplicationBuilder().token("TELEGRAM_TOKEN").build()
+app = ApplicationBuilder().token(TELEGRAM_TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("add_schedule", add_schedule))
