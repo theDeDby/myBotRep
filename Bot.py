@@ -14,6 +14,8 @@ import random
 import sys
 import nest_asyncio # type: ignore
 from pymongo import MongoClient # type: ignore
+from flask import Flask # type: ignore
+from threading import Thread
 
 #
 #   База данных
@@ -232,6 +234,23 @@ async def set_commands(app):
         BotCommand("view_tasks", "Просмотреть задачи"),
     ]
     await app.bot.set_my_commands(commands)
+
+#
+#   говорим боту жить 
+# 
+app_flask = Flask('')
+
+@app_flask.route('/')
+def home():
+    return "Я жив!"
+
+def run():
+    app_flask.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+
 #
 #   Запуск я так понимаю
 #
@@ -242,4 +261,5 @@ async def main():
 
 if __name__ == '__main__':
     nest_asyncio.apply()
+    keep_alive()
     asyncio.get_event_loop().run_until_complete(main())
