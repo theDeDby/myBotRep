@@ -18,7 +18,7 @@ from pymongo import MongoClient # type: ignore
 #
 #   База данных
 #
-MONGO_URI = os.getenv("MONGO_URI", "mongodb+srv://aria_user:ariauser123@cluster0.jjxcamk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
+MONGO_URI = os.getenv("MONGO_URI")
 
 client = MongoClient(MONGO_URI)
 # Название базы и коллекций
@@ -212,7 +212,7 @@ def schedule_send_task_reminder(user_id, subject, desc):
 #   Токен и команды
 #
 TELEGRAM_TOKEN = os.getenv("TELEGRAM_TOKEN")
-app = ApplicationBuilder().token("7764662995:AAHlKr641CEW5FyWpytSxBi4TvmkfgPH30Y").build()
+app = ApplicationBuilder().token("TELEGRAM_TOKEN").build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("help", help_command))
 app.add_handler(CommandHandler("add_schedule", add_schedule))
